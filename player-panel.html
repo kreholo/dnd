@@ -6,7 +6,6 @@
     <title>Oyuncu Paneli</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
-        /* Sadece bu sayfaya özel ufak grid ayarları */
         .panel-container { max-width: 800px; margin: 0 auto; width: 100%; padding: 20px;}
         .grid-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         @media (max-width: 600px) { .grid-layout { grid-template-columns: 1fr; } }
@@ -16,6 +15,13 @@
         select { padding: 12px; border: 1px solid var(--border-color); border-radius: 6px; background-color: #2a2a35; color: var(--text-main); font-size: 1rem; outline: none; width: 100%;}
         .dice-result-box { margin-top: 15px; padding: 20px; background: #2a2a35; border-radius: 8px; text-align: center; border: 1px solid var(--border-color);}
         .big-roll { color: var(--accent-color); font-size: 3rem; margin: 10px 0;}
+        
+        /* Hızlı Zarlar İçin Özel Tasarım */
+        .quick-rolls-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;}
+        .quick-btn { background-color: #3f51b5; font-size: 0.9rem; padding: 10px;}
+        .quick-btn:hover { background-color: #303f9f; }
+        .perc-btn { grid-column: span 2; background-color: #673ab7;}
+        .perc-btn:hover { background-color: #512da8;}
     </style>
 </head>
 <body>
@@ -52,23 +58,36 @@
             </div>
 
             <div class="right-column">
+                <section class="card" style="margin-bottom: 20px;">
+                    <h2>Hızlı Zarlar</h2>
+                    <p style="font-size: 0.8rem; margin-bottom: 10px;">Statlarına göre +1, -1 gibi bonuslar d20 zarına otomatik eklenir.</p>
+                    <div class="quick-rolls-grid">
+                        <button class="btn quick-btn" data-stat="str">STR Zarı</button>
+                        <button class="btn quick-btn" data-stat="dex">DEX Zarı</button>
+                        <button class="btn quick-btn" data-stat="con">CON Zarı</button>
+                        <button class="btn quick-btn" data-stat="int">INT Zarı</button>
+                        <button class="btn quick-btn" data-stat="wis">WIS Zarı</button>
+                        <button class="btn quick-btn" data-stat="cha">CHA Zarı</button>
+                        <button class="btn quick-btn perc-btn" data-stat="perception">Perception (Algı) Zarı</button>
+                    </div>
+                </section>
+
                 <section class="card">
-                    <h2>Zar At</h2>
+                    <h2>Özel Zar At</h2>
                     <div class="input-group">
                         <label>Zar Tipi</label>
                         <select id="diceType">
-                            <option value="20">d20 (Standart Hamle)</option>
+                            <option value="20">d20</option>
                             <option value="12">d12</option>
                             <option value="10">d10</option>
                             <option value="8">d8</option>
                             <option value="6">d6</option>
                             <option value="4">d4</option>
-                            <option value="100">d100 (Yüzdelik)</option>
                         </select>
                     </div>
                     <div class="input-group">
-                        <label>Modifier (Bonus/Ceza)</label>
-                        <input type="number" id="diceModifier" value="0" placeholder="Örn: 4 veya -2">
+                        <label>Manuel Bonus (+/-)</label>
+                        <input type="number" id="diceModifier" value="0">
                     </div>
                     <button id="rollDiceBtn" class="btn">Zarı Yuvarla!</button>
                     
