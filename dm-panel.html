@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DM Paneli</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* DM Paneline Özel Ekstra Tasarımlar */
+        .dm-container { max-width: 1000px; margin: 0 auto; width: 100%; padding: 20px;}
+        .grid-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .grid-layout { grid-template-columns: 1fr; } }
+        
+        /* Oyuncu Kartı Tasarımı */
+        .player-card { background: #2a2a35; border: 1px solid var(--border-color); border-radius: 8px; padding: 15px; margin-bottom: 15px;}
+        .player-header { display: flex; justify-content: space-between; border-bottom: 1px solid #444; padding-bottom: 10px; margin-bottom: 10px;}
+        .player-name { font-weight: bold; font-size: 1.2rem; color: var(--accent-color);}
+        .player-hp { font-weight: bold; color: #4caf50;} /* HP için yeşil ton */
+        
+        /* Statların yan yana dizilimi */
+        .stats-row { display: flex; justify-content: space-between; font-size: 0.85rem;}
+        .stat-item { text-align: center; background: #1e1e24; padding: 5px; border-radius: 4px; min-width: 45px;}
+        .stat-label { color: var(--text-muted); font-size: 0.7rem; display: block; margin-bottom: 3px;}
+        
+        /* Zar Akışı (Log) Tasarımı */
+        .dice-log { height: 500px; overflow-y: auto; background: #2a2a35; padding: 15px; border-radius: 8px; border: 1px solid var(--border-color);}
+        .log-entry { padding: 10px; border-bottom: 1px solid #444; margin-bottom: 10px; animation: fadeIn 0.5s ease-in-out;}
+        .log-entry:last-child { border-bottom: none;}
+        .log-char { font-weight: bold; color: var(--text-main);}
+        .log-result { font-size: 1.8rem; color: var(--accent-color); font-weight: bold; margin: 5px 0;}
+        .log-detail { font-size: 0.8rem; color: var(--text-muted);}
+
+        /* Yeni zar geldiğinde tatlı bir animasyon olsun */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <div class="dm-container">
+        <header>
+            <h1>Dungeon Master Paneli</h1>
+            <p>Lobi ID: <strong id="dmLobbyIdDisplay" style="color: var(--accent-color); font-size: 1.2rem;">...</strong></p>
+            <p class="small-text">Oyuncular bu kodu kullanarak lobiye katılabilir.</p>
+        </header>
+
+        <main class="grid-layout">
+            <div class="left-column">
+                <section class="card">
+                    <h2>Masadaki Oyuncular</h2>
+                    <div id="playersList">
+                        <p style="color: var(--text-muted);">Oyuncular bekleniyor...</p>
+                    </div>
+                </section>
+            </div>
+
+            <div class="right-column">
+                <section class="card">
+                    <h2>Zar Geçmişi</h2>
+                    <div id="diceLog" class="dice-log">
+                        <p style="color: var(--text-muted); text-align: center;">Henüz zar atılmadı.</p>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="js/firebase-config.js"></script>
+    <script type="module" src="js/dm.js"></script>
+</body>
+</html>

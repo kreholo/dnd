@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D&D Lobi ve Zar Sistemi</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>D&D Masaüstü Sistemi</h1>
+            <p>Maceraya atılmak için bir lobi kur veya mevcut bir lobiye katıl.</p>
+        </header>
+
+        <main class="lobby-container">
+            <section class="card dm-section">
+                <h2>Dungeon Master</h2>
+                <p>Yeni bir oturum başlat ve oyuncularını masaya çağır.</p>
+                <button id="createLobbyBtn" class="btn dm-btn">Yeni Lobi Oluştur</button>
+                
+                <div id="lobbyResult" class="hidden" style="display: none; margin-top: 15px;">
+                    <p><strong>Lobi ID:</strong> <span id="generatedLobbyId">...</span></p>
+                    <p class="small-text">Bu kodu oyuncularınla paylaş.</p>
+                    <button id="goToDmPanelBtn" class="btn secondary-btn">DM Paneline Git</button>
+                </div>
+            </section>
+
+            <hr class="divider">
+
+            <section class="card player-section">
+                <h2>Oyuncu Girişi</h2>
+                <p>DM'inin verdiği kod ile masadaki yerini al.</p>
+                
+                <form id="joinLobbyForm">
+                    <div class="input-group">
+                        <label for="lobbyIdInput">Lobi ID</label>
+                        <input type="text" id="lobbyIdInput" placeholder="Örn: kampanya-xyz" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="playerNameInput">Oyuncu Adı</label>
+                        <input type="text" id="playerNameInput" placeholder="Kendi Adın" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="characterNameInput">Karakter Adı</label>
+                        <input type="text" id="characterNameInput" placeholder="Örn: Phantom Rogue" required>
+                    </div>
+
+                    <button type="submit" class="btn player-btn">Lobiye Katıl</button>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <script type="module" src="js/firebase-config.js"></script>
+    <script type="module" src="js/auth.js"></script>
+</body>
+</html>

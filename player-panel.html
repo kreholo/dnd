@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oyuncu Paneli</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Sadece bu sayfaya özel ufak grid ayarları */
+        .panel-container { max-width: 800px; margin: 0 auto; width: 100%; padding: 20px;}
+        .grid-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 600px) { .grid-layout { grid-template-columns: 1fr; } }
+        .hp-controls { display: flex; gap: 10px; align-items: center; margin-bottom: 10px;}
+        .hp-controls input { width: 70px; text-align: center; }
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        select { padding: 12px; border: 1px solid var(--border-color); border-radius: 6px; background-color: #2a2a35; color: var(--text-main); font-size: 1rem; outline: none; width: 100%;}
+        .dice-result-box { margin-top: 15px; padding: 20px; background: #2a2a35; border-radius: 8px; text-align: center; border: 1px solid var(--border-color);}
+        .big-roll { color: var(--accent-color); font-size: 3rem; margin: 10px 0;}
+    </style>
+</head>
+<body>
+    <div class="panel-container">
+        <header>
+            <h1 id="displayCharacterName">Karakter Yükleniyor...</h1>
+            <p>Lobi ID: <strong id="displayLobbyId" style="color: var(--accent-color);">...</strong></p>
+        </header>
+
+        <main class="grid-layout">
+            <div class="left-column">
+                <section class="card">
+                    <h2>Can Puanı (HP)</h2>
+                    <div class="hp-controls">
+                        <input type="number" id="hpInput" placeholder="Mevcut">
+                        <span>/</span>
+                        <input type="number" id="maxHpInput" placeholder="Maks">
+                    </div>
+                    <button id="updateHpBtn" class="btn secondary-btn">HP Güncelle</button>
+                </section>
+
+                <section class="card" style="margin-top: 20px;">
+                    <h2>Yetenek Skorları</h2>
+                    <div class="stats-grid">
+                        <div class="input-group"><label>STR (Güç)</label><input type="number" id="stat-str" value="10"></div>
+                        <div class="input-group"><label>DEX (Çeviklik)</label><input type="number" id="stat-dex" value="10"></div>
+                        <div class="input-group"><label>CON (Dayanıklılık)</label><input type="number" id="stat-con" value="10"></div>
+                        <div class="input-group"><label>INT (Zeka)</label><input type="number" id="stat-int" value="10"></div>
+                        <div class="input-group"><label>WIS (Bilgelik)</label><input type="number" id="stat-wis" value="10"></div>
+                        <div class="input-group"><label>CHA (Karizma)</label><input type="number" id="stat-cha" value="10"></div>
+                    </div>
+                    <button id="saveStatsBtn" class="btn secondary-btn" style="margin-top: 10px;">Statları Kaydet</button>
+                </section>
+            </div>
+
+            <div class="right-column">
+                <section class="card">
+                    <h2>Zar At</h2>
+                    <div class="input-group">
+                        <label>Zar Tipi</label>
+                        <select id="diceType">
+                            <option value="20">d20 (Standart Hamle)</option>
+                            <option value="12">d12</option>
+                            <option value="10">d10</option>
+                            <option value="8">d8</option>
+                            <option value="6">d6</option>
+                            <option value="4">d4</option>
+                            <option value="100">d100 (Yüzdelik)</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Modifier (Bonus/Ceza)</label>
+                        <input type="number" id="diceModifier" value="0" placeholder="Örn: 4 veya -2">
+                    </div>
+                    <button id="rollDiceBtn" class="btn">Zarı Yuvarla!</button>
+                    
+                    <div id="diceResultBox" class="dice-result-box hidden">
+                        <p class="small-text">Toplam Sonuç</p>
+                        <h3 id="finalRollResult" class="big-roll">...</h3>
+                        <p id="rollDetails" class="small-text" style="color: var(--text-muted);">...</p>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="js/firebase-config.js"></script>
+    <script type="module" src="js/player.js"></script>
+</body>
+</html>
